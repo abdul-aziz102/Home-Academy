@@ -59,7 +59,7 @@ const Navbar = () => {
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 5 }}
           />
-          <span className="text-xl font-bold text-blue-600">Home Academy</span>
+          <span className="text-xl font-bold text-blue-600">Home</span>
         </Link>
 
         {/* Desktop Links */}
