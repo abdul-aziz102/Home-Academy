@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# production
+dist/
+build/
+
+# testing
+coverage/
+.vitest/
+*.log
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# system files
+Thumbs.db
+.vscode/
+.idea/
+
+# lockfiles (if you use only one type, keep that one)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# output of Vite
+*.tsbuildinfo
+
+# cache
+.cache/
+.next/
+out/
