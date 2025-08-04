@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
@@ -22,22 +21,15 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const payload = { ...formData, age: Number(formData.age) };
-      const res = await axios.post('http://localhost:3000/api/signup', payload);
-      alert(res.data.message || 'Signup successful');
 
-      // ✅ Set registration flag AFTER successful signup
-      localStorage.setItem('isRegistered', 'true');
-      window.dispatchEvent(new Event('userRegistered')); // update Navbar immediately
+    // ✅ Save registration flag
+    localStorage.setItem('isRegistered', 'true');
+    window.dispatchEvent(new Event('userRegistered')); // For navbar updates
 
-      navigate('/result', { state: payload });
-    } catch (err) {
-      console.error("Signup error:", err.response?.data || err.message);
-      alert(err.response?.data?.message || 'Signup failed');
-    }
+    // ✅ Navigate to result page with form data
+    navigate('/result', { state: formData });
   };
 
   return (
@@ -54,7 +46,7 @@ const Register = () => {
             { name: 'englishGoal', type: 'text', label: 'English Learning Goal' },
             { name: 'learningStyle', type: 'text', label: 'Preferred Learning Style' },
           ].map(({ name, type, label }) => (
-            <div key={name} className={['name', 'email', 'password'].includes(name) ? 'sm:col-span-2' : ''}>
+            <div key={name} className={['name', 'email'].includes(name) ? 'sm:col-span-2' : ''}>
               <label className="block mb-1 text-sm font-medium text-gray-700">{label}</label>
               <input
                 type={type}
