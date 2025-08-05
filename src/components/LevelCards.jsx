@@ -14,8 +14,8 @@ const LevelCards = () => {
       image: "/level pre.png",
       skills: ["Alphabet & sounds", "Basic greetings", "Simple questions", "Everyday words"],
       target: "Absolute beginners",
-      duration: "8 weeks",
-      intensity: "2 classes/week",
+      duration: "12 weeks",
+      intensity: "5 classes/week",
       price: "Rs. 3,200",
       category: "Beginner"
     },
@@ -25,8 +25,8 @@ const LevelCards = () => {
       image: "/level bg.png",
       skills: ["Present tenses", "Daily routines", "Shopping vocabulary", "Simple directions"],
       target: "Basic understanding",
-      duration: "10 weeks",
-      intensity: "3 classes/week",
+      duration: "12 weeks",
+      intensity: "5 classes/week",
       price: "Rs. 3,800",
       category: "Beginner"
     },
@@ -37,7 +37,7 @@ const LevelCards = () => {
       skills: ["Past tenses", "Describing people", "Writing emails", "Telling stories"],
       target: "CEFR A1",
       duration: "12 weeks",
-      intensity: "3 classes/week",
+      intensity: "5 classes/week",
       price: "Rs. 4,000",
       category: "Elementary"
     },
@@ -48,7 +48,7 @@ const LevelCards = () => {
       skills: ["Future tenses", "Comparing things", "News articles", "Phone conversations"],
       target: "CEFR A2",
       duration: "12 weeks",
-      intensity: "3 classes/week",
+      intensity: "5 classes/week",
       price: "Rs. 4,200",
       category: "Intermediate"
     },
@@ -59,7 +59,7 @@ const LevelCards = () => {
       skills: ["Conditionals", "Debating skills", "Formal letters", "TV shows understanding"],
       target: "CEFR B1",
       duration: "12 weeks",
-      intensity: "4 classes/week",
+      intensity: "5 classes/week",
       price: "Rs. 4,500",
       category: "Intermediate"
     },
@@ -69,8 +69,8 @@ const LevelCards = () => {
       image: "/level4.png",
       skills: ["Complex grammar", "Academic writing", "Presentations", "Idiomatic expressions"],
       target: "CEFR B2",
-      duration: "14 weeks",
-      intensity: "4 classes/week",
+      duration: "12 weeks",
+      intensity: "5 classes/week",
       price: "Rs. 4,800",
       category: "Advanced"
     },
@@ -80,7 +80,7 @@ const LevelCards = () => {
       image: "/level5.png",
       skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
       target: "CEFR C1",
-      duration: "16 weeks",
+      duration: "12 weeks",
       intensity: "5 classes/week",
       price: "Rs. 5,000",
       category: "Advanced"
@@ -91,7 +91,7 @@ const LevelCards = () => {
       image: "/leceladv.png",
       skills: ["Advanced rhetoric", "Technical writing", "Media analysis", "Cultural nuance"],
       target: "CEFR C2",
-      duration: "16 weeks",
+      duration: "12 weeks",
       intensity: "5 classes/week",
       price: "Rs. 5,500",
       category: "Advanced"

@@ -90,9 +90,9 @@ const Banner = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
-                { label: "Students Trained", value: 2000, suffix: "+" },
+                { label: "Students Trained", value: 20000, suffix: "+" },
                 { label: "Success Rate", value: 97, suffix: "%" },
-                { label: "Expert Teachers", value: 15, suffix: "+" },
+                { label: "Expert Teachers", value: 30, suffix: "+" },
                 { label: "Average Rating", value: 4.9, suffix: "/5", decimals: 1 }
               ].map((item, index) => (
                 <div key={index} className="bg-white/80 p-3 rounded-lg shadow-sm border border-gray-100 text-center">
