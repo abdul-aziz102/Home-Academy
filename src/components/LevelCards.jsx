@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheck, FaArrowRight, FaRegClock, FaUserGraduate, FaChartLine } from 'react-icons/fa';
+import { FaCheck, FaArrowRight, FaRegClock, FaUserGraduate } from 'react-icons/fa';
 
 const LevelCards = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -11,7 +11,7 @@ const LevelCards = () => {
     {
       title: "Pre-Beginner",
       description: "Start from scratch with basic vocabulary, greetings, and simple sentences.",
-      image: "/level pre.png",
+      image: "/levels.jpg",
       skills: ["Alphabet & sounds", "Basic greetings", "Simple questions", "Everyday words"],
       target: "Absolute beginners",
       duration: "12 weeks",
@@ -22,7 +22,7 @@ const LevelCards = () => {
     {
       title: "Beginner",
       description: "Build foundation with present tense, daily conversations, and essential grammar.",
-      image: "/level bg.png",
+      image: "/levels.jpg",
       skills: ["Present tenses", "Daily routines", "Shopping vocabulary", "Simple directions"],
       target: "Basic understanding",
       duration: "12 weeks",
@@ -33,7 +33,7 @@ const LevelCards = () => {
     {
       title: "Elementary (Level 1)",
       description: "Handle basic social situations, read simple texts, and write short paragraphs.",
-      image: "/level1.png",
+      image: "/levels.jpg",
       skills: ["Past tenses", "Describing people", "Writing emails", "Telling stories"],
       target: "CEFR A1",
       duration: "12 weeks",
@@ -44,7 +44,7 @@ const LevelCards = () => {
     {
       title: "Pre-Intermediate (Level 2)",
       description: "Express opinions, understand main points in conversations, and write cohesive texts.",
-      image: "/level2.png",
+      image: "/levels.jpg",
       skills: ["Future tenses", "Comparing things", "News articles", "Phone conversations"],
       target: "CEFR A2",
       duration: "12 weeks",
@@ -55,7 +55,7 @@ const LevelCards = () => {
     {
       title: "Intermediate (Level 3)",
       description: "Discuss various topics, understand native speakers, and write detailed texts.",
-      image: "/level3.png",
+      image: "/levels.jpg",
       skills: ["Conditionals", "Debating skills", "Formal letters", "TV shows understanding"],
       target: "CEFR B1",
       duration: "12 weeks",
@@ -66,7 +66,7 @@ const LevelCards = () => {
     {
       title: "Upper-Intermediate (Level 4)",
       description: "Communicate fluently in professional contexts with nuanced language use.",
-      image: "/level4.png",
+      image: "/levels.jpg",
       skills: ["Complex grammar", "Academic writing", "Presentations", "Idiomatic expressions"],
       target: "CEFR B2",
       duration: "12 weeks",
@@ -77,7 +77,7 @@ const LevelCards = () => {
     {
       title: "Advanced (Level 5)",
       description: "Master English for academic excellence, business leadership, and cultural nuance.",
-      image: "/level5.png",
+      image: "/levels.jpg",
       skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
       target: "CEFR C1",
       duration: "12 weeks",
@@ -88,7 +88,7 @@ const LevelCards = () => {
     {
       title: "Proficiency (Level 6)",
       description: "Achieve native-like fluency for specialized professional and academic contexts.",
-      image: "/leceladv.png",
+      image: "/levels.jpg",
       skills: ["Advanced rhetoric", "Technical writing", "Media analysis", "Cultural nuance"],
       target: "CEFR C2",
       duration: "12 weeks",
@@ -100,11 +100,10 @@ const LevelCards = () => {
 
   const filters = ['All', 'Beginner', 'Elementary', 'Intermediate', 'Advanced'];
 
-  const filteredLevels = activeFilter === 'All' 
-    ? levels 
+  const filteredLevels = activeFilter === 'All'
+    ? levels
     : levels.filter(level => level.category === activeFilter);
 
-  // Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -151,7 +150,7 @@ const LevelCards = () => {
   };
 
   return (
-    <section className="py-16 ">
+    <section className="py-16">
       <div className="container mx-auto px-5">
         <motion.div 
           className="text-center mb-12"
@@ -159,19 +158,13 @@ const LevelCards = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800">Our English Proficiency Levels</h2>
+          <h2 className="text-4xl font-bold mb-3 text-gray-800">Our English Proficiency Levels</h2>
           <p className="text-lg max-w-3xl mx-auto text-gray-600">
             Structured progression from absolute beginner to native-like fluency with certified instructors
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-2 mb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
+        <motion.div className="flex flex-wrap justify-center gap-2 mb-10">
           {filters.map(filter => (
             <button
               key={filter}
@@ -215,33 +208,29 @@ const LevelCards = () => {
                 >
                   <div className="h-48 overflow-hidden relative">
                     <img 
-                      src={level.image} 
-                      alt={level.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      src={level.image}
+                      alt={level.title}
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-4 right-4 bg-white/90 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full shadow">
                       {level.target}
                     </div>
                   </div>
-                  
+
                   <div className="p-5 flex-1 flex flex-col">
                     <div className="mb-3">
                       <h3 className="text-xl font-bold text-gray-800">{level.title}</h3>
                     </div>
-                    
+
                     <p className="text-gray-600 mb-4 text-sm">{level.description}</p>
-                    
+
                     <div className="mb-5 flex-1">
                       <h4 className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">YOU'LL LEARN</h4>
                       <ul className="space-y-2">
                         {level.skills.map((skill, i) => (
-                          <motion.li 
-                            key={i} 
-                            className="flex items-center text-sm"
-                            whileHover={{ x: 5 }}
-                          >
-                            <FaCheck className="w-3 h-3 mr-2 text-green-500 flex-shrink-0" />
+                          <motion.li key={i} className="flex items-center text-sm" whileHover={{ x: 5 }}>
+                            <FaCheck className="w-3 h-3 mr-2 text-green-500" />
                             <span className="text-gray-700">{skill}</span>
                           </motion.li>
                         ))}
@@ -273,7 +262,6 @@ const LevelCards = () => {
                   </div>
                 </motion.div>
 
-                {/* Hover overlay */}
                 <AnimatePresence>
                   {hoveredCard === index && (
                     <motion.div 
@@ -308,7 +296,6 @@ const LevelCards = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* CTA */}
         <motion.div 
           className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}

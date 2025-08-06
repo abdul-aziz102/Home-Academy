@@ -37,7 +37,7 @@ const About = () => {
   ];
 
   const stats = [
-    { value: "500+", label: "Students Taught" },
+    { value: "20000+", label: "Students Taught" },
     { value: "98%", label: "Satisfaction Rate" },
     { value: "15+", label: "Years Experience" },
     { value: "24/7", label: "Support Available" }

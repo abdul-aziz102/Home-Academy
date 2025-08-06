@@ -41,15 +41,15 @@ const Banner = () => {
             <div className="mb-4 flex items-center bg-white/80 rounded-full py-1 px-4 w-fit shadow-sm">
               <RiEnglishInput className="text-indigo-600 mr-2" />
               <span className="font-medium text-indigo-700 text-sm sm:text-base">
-                Lyari's Premier English Academy
+                English Language Program
               </span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-800 leading-tight">
-              Unlock Your <span className="text-indigo-700">English Potential</span> in{" "}
+              Giving Your <span className="text-indigo-700">Potential A Language</span> 
               <span className="relative inline-block">
-                <span className="relative z-10">Karachi</span>
-                <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-300/60 z-0"></span>
+                <span className="relative z-10 ml-4">Est.1999</span>
+                
               </span>
             </h1>
 

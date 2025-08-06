@@ -24,11 +24,14 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Save registration flag
+    // Save registration data and flag
+    localStorage.setItem('registrationData', JSON.stringify(formData));
     localStorage.setItem('isRegistered', 'true');
-    window.dispatchEvent(new Event('userRegistered')); // For navbar updates
+    
+    // Dispatch events to update navbar
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('userRegistered'));
 
-    // ✅ Navigate to result page with form data
     navigate('/result', { state: formData });
   };
 

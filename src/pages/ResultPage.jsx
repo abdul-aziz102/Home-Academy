@@ -10,17 +10,14 @@ const ResultPage = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
     
-    // Add logo (replace with your actual logo)
-    // doc.addImage(logo, 'PNG', 15, 10, 30, 30);
-    
     // Header
     doc.setFontSize(20);
-    doc.setTextColor(40, 53, 147); // Indigo color
+    doc.setTextColor(40, 53, 147);
     doc.setFont('helvetica', 'bold');
     doc.text('Home Academy', 105, 20, { align: 'center' });
     
     doc.setFontSize(16);
-    doc.setTextColor(0, 0, 0); // Black color
+    doc.setTextColor(0, 0, 0);
     doc.text('Student Registration Details', 105, 30, { align: 'center' });
     
     // Divider line
@@ -28,7 +25,7 @@ const ResultPage = () => {
     doc.setLineWidth(0.5);
     doc.line(20, 35, 190, 35);
     
-    // Student details section
+    // Student details
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
     
@@ -37,7 +34,7 @@ const ResultPage = () => {
     const rightColumnX = 110;
     let currentX = leftColumnX;
     
-    // Personal Information section
+    // Personal Information
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text('Personal Information', leftColumnX, yPosition);
@@ -60,7 +57,6 @@ const ResultPage = () => {
           currentX = leftColumnX;
         }
         
-        // Switch to right column after half of personal fields
         if (field === 'age' && currentX === leftColumnX) {
           currentX = rightColumnX;
           yPosition = 60;
@@ -68,11 +64,10 @@ const ResultPage = () => {
       }
     });
     
-    // Reset position for next section
+    // Education Information
     yPosition += 10;
     currentX = leftColumnX;
     
-    // Education Information section
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text('Education Information', leftColumnX, yPosition);
@@ -103,7 +98,6 @@ const ResultPage = () => {
     doc.text('Thank you for registering with Home Academy', 105, 280, { align: 'center' });
     doc.text('Contact: info@homeacademy.com | Phone: +1234567890', 105, 285, { align: 'center' });
     
-    // Save the PDF
     doc.save(`HomeAcademy_Registration_${state.name || 'Student'}.pdf`);
   };
 
