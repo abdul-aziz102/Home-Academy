@@ -11,7 +11,7 @@ const LevelCards = () => {
     {
       title: "Pre-Beginner",
       description: "Start from scratch with basic vocabulary, greetings, and simple sentences.",
-      image: "/levels.jpg",
+      image: "/pre-beg.png",
       skills: ["Alphabet & sounds", "Basic greetings", "Simple questions", "Everyday words"],
       target: "Absolute beginners",
       duration: "12 weeks",
@@ -22,7 +22,7 @@ const LevelCards = () => {
     {
       title: "Beginner",
       description: "Build foundation with present tense, daily conversations, and essential grammar.",
-      image: "/levels.jpg",
+      image: "/brg.png",
       skills: ["Present tenses", "Daily routines", "Shopping vocabulary", "Simple directions"],
       target: "Basic understanding",
       duration: "12 weeks",
@@ -33,7 +33,7 @@ const LevelCards = () => {
     {
       title: "Elementary (Level 1)",
       description: "Handle basic social situations, read simple texts, and write short paragraphs.",
-      image: "/levels.jpg",
+      image: "/le1.png",
       skills: ["Past tenses", "Describing people", "Writing emails", "Telling stories"],
       target: "CEFR A1",
       duration: "12 weeks",
@@ -44,7 +44,7 @@ const LevelCards = () => {
     {
       title: "Pre-Intermediate (Level 2)",
       description: "Express opinions, understand main points in conversations, and write cohesive texts.",
-      image: "/levels.jpg",
+      image: "/le2.png",
       skills: ["Future tenses", "Comparing things", "News articles", "Phone conversations"],
       target: "CEFR A2",
       duration: "12 weeks",
@@ -55,7 +55,7 @@ const LevelCards = () => {
     {
       title: "Intermediate (Level 3)",
       description: "Discuss various topics, understand native speakers, and write detailed texts.",
-      image: "/levels.jpg",
+      image: "/l3.png",
       skills: ["Conditionals", "Debating skills", "Formal letters", "TV shows understanding"],
       target: "CEFR B1",
       duration: "12 weeks",
@@ -66,7 +66,7 @@ const LevelCards = () => {
     {
       title: "Upper-Intermediate (Level 4)",
       description: "Communicate fluently in professional contexts with nuanced language use.",
-      image: "/levels.jpg",
+      image: "/le4.png",
       skills: ["Complex grammar", "Academic writing", "Presentations", "Idiomatic expressions"],
       target: "CEFR B2",
       duration: "12 weeks",
@@ -77,7 +77,7 @@ const LevelCards = () => {
     {
       title: "Advanced (Level 5)",
       description: "Master English for academic excellence, business leadership, and cultural nuance.",
-      image: "/levels.jpg",
+      image: "/le5.png",
       skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
       target: "CEFR C1",
       duration: "12 weeks",
@@ -86,9 +86,9 @@ const LevelCards = () => {
       category: "Advanced"
     },
     {
-      title: "Proficiency (Level 6)",
+      title: "Proficiency (Level Advance)",
       description: "Achieve native-like fluency for specialized professional and academic contexts.",
-      image: "/levels.jpg",
+      image: "/Adv.png",
       skills: ["Advanced rhetoric", "Technical writing", "Media analysis", "Cultural nuance"],
       target: "CEFR C2",
       duration: "12 weeks",

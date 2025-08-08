@@ -11,7 +11,7 @@ const Corses = () => {
     {
       title: "Pre-Beginner",
       description: "Start from scratch with basic vocabulary, greetings, and simple sentences.",
-      image: "/levels.jpg",
+      image: "/pre-beg.png",
       skills: ["Alphabet & sounds", "Basic greetings", "Simple questions", "Everyday words"],
       target: "Absolute beginners",
       price: "Rs. 3200 (3 months)",
@@ -21,7 +21,7 @@ const Corses = () => {
     {
       title: "Beginner",
       description: "Build foundation with present tense, daily conversations, and essential grammar.",
-      image: "/levels.jpg",
+      image: "/brg.png",
       skills: ["Present tenses", "Daily routines", "Shopping vocabulary", "Simple directions"],
       target: "Basic understanding",
       price: "Rs. 3800 (3 months)",
@@ -31,7 +31,7 @@ const Corses = () => {
     {
       title: "Level 1 (Elementary)",
       description: "Handle basic social situations, read simple texts, and write short paragraphs.",
-      image: "/levels.jpg",
+      image: "/le1.png",
       skills: ["Past tenses", "Describing people", "Writing emails", "Telling stories"],
       target: "CEFR A1",
       price: "Rs. 4000 (3 months)",
@@ -41,7 +41,7 @@ const Corses = () => {
     {
       title: "Level 2 (Pre-Intermediate)",
       description: "Express opinions, understand main points in conversations, and write cohesive texts.",
-      image: "/levels.jpg",  
+      image: "/le2.png",
       skills: ["Future tenses", "Comparing things", "News articles", "Phone conversations"],
       target: "CEFR A2",
       price: "Rs. 4200 (3 months)",
@@ -51,7 +51,7 @@ const Corses = () => {
     {
       title: "Level 3 (Intermediate)",
       description: "Discuss various topics, understand native speakers, and write detailed texts.",
-      image: "/levels.jpg",
+      image: "/l3.png",
       skills: ["Conditionals", "Debating skills", "Formal letters", "TV shows understanding"],
       target: "CEFR B1",
       price: "Rs. 4500 (3 months)",
@@ -61,7 +61,7 @@ const Corses = () => {
     {
       title: "Level 4 (Upper-Intermediate)",
       description: "Communicate fluently in professional contexts with nuanced language use.",
-      image: "/levels.jpg",
+      image: "/le4.png",
       skills: ["Complex grammar", "Academic writing", "Presentations", "Idiomatic expressions"],
       target: "CEFR B2",
       price: "Rs. 4800 (3 months)",
@@ -71,7 +71,7 @@ const Corses = () => {
     {
       title: "Level 5",
       description: "Master English for academic excellence, business leadership, and cultural nuance.",
-      image: "/levels.jpg",
+      image: "/le5.png",
       skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
       target: "CEFR C1/C2",
       price: "Rs. 5000 (3 months)",
@@ -81,7 +81,7 @@ const Corses = () => {
     {
       title: "Level (Advanced)",
       description: "Master English for academic excellence, business leadership, and cultural nuance.",
-      image: "/levels.jpg",
+      image: "/Adv.png",
       skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
       target: "CEFR C1/C2",
       price: "Rs. 5500 (3 months)",

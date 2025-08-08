@@ -1,38 +1,85 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
+import { FaFilePdf, FaHome, FaCheckCircle, FaUserGraduate, FaBook, FaChalkboardTeacher } from 'react-icons/fa';
 
 const ResultPage = () => {
   const { state } = useLocation();
 
-  if (!state) return <div className="text-center text-red-500 mt-10">No data submitted.</div>;
+  if (!state) return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50">
+      <div className="bg-white p-8 rounded-xl shadow-lg text-center max-w-md mx-4">
+        <FaCheckCircle className="text-red-500 text-5xl mx-auto mb-4" />
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">No Registration Data Found</h2>
+        <p className="text-gray-600 mb-6">Please complete the registration form first.</p>
+        <Link to="/register" className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
+          Go to Registration
+        </Link>
+      </div>
+    </div>
+  );
 
   const generatePDF = () => {
     const doc = new jsPDF();
     
-    // Header
-    doc.setFontSize(20);
-    doc.setTextColor(40, 53, 147);
+    // Add watermark
+    doc.setFontSize(60);
+    doc.setTextColor(240, 240, 240);
     doc.setFont('helvetica', 'bold');
-    doc.text('Home Academy', 105, 20, { align: 'center' });
+    doc.text('HOME ACADEMY', 40, 140, { angle: 45 });
     
-    doc.setFontSize(16);
+    // Reset styles for content
     doc.setTextColor(0, 0, 0);
-    doc.text('Student Registration Details', 105, 30, { align: 'center' });
+    
+    // Add header with logo
+    doc.addImage('/home.png', 'PNG', 15, 10, 30, 30);
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(40, 53, 147);
+    doc.text('Home Academy', 50, 25);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Student Registration Certificate', 50, 35);
     
     // Divider line
     doc.setDrawColor(40, 53, 147);
     doc.setLineWidth(0.5);
-    doc.line(20, 35, 190, 35);
+    doc.line(15, 40, 195, 40);
     
-    // Student details
+    // Main content
+    let yPosition = 60;
+    
+    // Certificate text
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
+    doc.text('This is to certify that', 105, yPosition, { align: 'center' });
+    yPosition += 10;
     
-    let yPosition = 50;
-    const leftColumnX = 20;
-    const rightColumnX = 110;
-    let currentX = leftColumnX;
+    // Student name
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(40, 53, 147);
+    doc.text(state.name || 'Student', 105, yPosition, { align: 'center' });
+    yPosition += 15;
+    
+    // Details section
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(0, 0, 0);
+    doc.text('has successfully registered for our English language program with the following details:', 105, yPosition, { align: 'center' });
+    yPosition += 20;
+    
+    // Two column layout
+    const leftColumnX = 30;
+    const rightColumnX = 120;
+    
+    const renderField = (doc, x, y, label, value) => {
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${label}:`, x, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(value, x + 40, y);
+    };
     
     // Personal Information
     doc.setFontSize(14);
@@ -41,128 +88,163 @@ const ResultPage = () => {
     yPosition += 10;
     
     doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
+    const personalFields = [
+      { label: 'Email', value: state.email },
+      { label: 'Age', value: state.age },
+      { label: 'Gender', value: state.gender },
+      { label: 'Phone', value: state.phone }
+    ];
     
-    const personalFields = ['name', 'email', 'age', 'gender', 'phone'];
     personalFields.forEach(field => {
-      if (state[field]) {
-        const label = field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1');
-        doc.text(`${label}:`, currentX, yPosition);
-        doc.text(state[field].toString(), currentX + 40, yPosition);
+      if (field.value) {
+        renderField(doc, leftColumnX, yPosition, field.label, field.value);
         yPosition += 8;
-        
-        if (yPosition > 260) {
-          doc.addPage();
-          yPosition = 20;
-          currentX = leftColumnX;
-        }
-        
-        if (field === 'age' && currentX === leftColumnX) {
-          currentX = rightColumnX;
-          yPosition = 60;
-        }
       }
     });
     
     // Education Information
-    yPosition += 10;
-    currentX = leftColumnX;
-    
+    yPosition += 5;
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
-    doc.text('Education Information', leftColumnX, yPosition);
+    doc.text('Education Information', rightColumnX, yPosition);
     yPosition += 10;
     
     doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
+    const educationFields = [
+      { label: 'Education', value: state.education },
+      { label: 'English Goal', value: state.englishGoal },
+      { label: 'Learning Style', value: state.learningStyle },
+      { label: 'Level', value: state.level }
+    ];
     
-    const educationFields = ['education', 'englishGoal', 'learningStyle', 'level'];
     educationFields.forEach(field => {
-      if (state[field]) {
-        const label = field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1');
-        doc.text(`${label}:`, currentX, yPosition);
-        doc.text(state[field].toString(), currentX + 40, yPosition);
+      if (field.value) {
+        renderField(doc, rightColumnX, yPosition, field.label, field.value);
         yPosition += 8;
-        
-        if (yPosition > 260) {
-          doc.addPage();
-          yPosition = 20;
-          currentX = leftColumnX;
-        }
       }
     });
     
     // Footer
+    yPosition = 260;
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text('Thank you for registering with Home Academy', 105, 280, { align: 'center' });
-    doc.text('Contact: info@homeacademy.com | Phone: +1234567890', 105, 285, { align: 'center' });
+    doc.text('Thank you for choosing Home Academy for your English learning journey.', 105, yPosition, { align: 'center' });
+    yPosition += 5;
+    doc.text('Contact: homeacademy.lyari@gmail.com | Phone: 0332-3769179 / 0332-2449008', 105, yPosition, { align: 'center' });
     
-    doc.save(`HomeAcademy_Registration_${state.name || 'Student'}.pdf`);
+    // Save the PDF
+    doc.save(`HomeAcademy_Certificate_${state.name || 'Student'}.pdf`);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
-      <div className="bg-white shadow-xl rounded-lg max-w-2xl w-full p-8 border border-indigo-100">
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-indigo-800 mb-2">Home Academy</h2>
-          <h3 className="text-xl text-gray-600">Student Registration Summary</h3>
-          <div className="h-1 bg-indigo-200 w-32 mx-auto my-4 rounded-full"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div>
-            <h4 className="text-lg font-semibold text-indigo-700 mb-3 pb-2 border-b border-indigo-100">Personal Information</h4>
-            <ul className="space-y-2">
-              {['name', 'email', 'age', 'gender', 'phone'].map(key => (
-                state[key] && (
-                  <li key={key} className="flex">
-                    <span className="font-medium text-gray-700 w-32">
-                      {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}:
-                    </span>
-                    <span className="text-gray-600">{state[key]}</span>
-                  </li>
-                )
-              ))}
-            </ul>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+          {/* Header Section */}
+          <div className="bg-indigo-700 p-6 text-center relative">
+            <div className="absolute top-4 left-4">
+              <img src="/home.png" alt="Home Academy Logo" className="h-12" />
+            </div>
+            <h1 className="text-3xl font-bold text-white mt-4">Registration Confirmation</h1>
+            <p className="text-indigo-200 mt-2">Your learning journey starts here</p>
           </div>
           
-          <div>
-            <h4 className="text-lg font-semibold text-indigo-700 mb-3 pb-2 border-b border-indigo-100">Education Information</h4>
-            <ul className="space-y-2">
-              {['education', 'englishGoal', 'learningStyle', 'level'].map(key => (
-                state[key] && (
-                  <li key={key} className="flex">
-                    <span className="font-medium text-gray-700 w-32">
-                      {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}:
-                    </span>
-                    <span className="text-gray-600">{state[key]}</span>
-                  </li>
-                )
-              ))}
-            </ul>
+          {/* Content Section */}
+          <div className="p-8">
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* Student Profile Card */}
+              <div className="bg-indigo-50 rounded-lg p-6 flex-1">
+                <div className="flex items-center mb-6">
+                  <div className="bg-indigo-100 p-3 rounded-full mr-4">
+                    <FaUserGraduate className="text-indigo-600 text-2xl" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800">{state.name}</h2>
+                    <p className="text-indigo-600">{state.email}</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <FaBook className="text-indigo-500 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-500">Course Level</p>
+                      <p className="font-medium">{state.level}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <FaChalkboardTeacher className="text-indigo-500 mr-3" />
+                    <div>
+                      <p className="text-sm text-gray-500">Learning Style</p>
+                      <p className="font-medium">{state.learningStyle}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Details Section */}
+              <div className="flex-1">
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="bg-white border border-gray-100 rounded-lg p-5 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-100">Personal Details</h3>
+                    <div className="space-y-3">
+                      {['age', 'gender', 'phone'].map(key => (
+                        state[key] && (
+                          <div key={key} className="flex justify-between">
+                            <span className="text-gray-600">
+                              {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                            </span>
+                            <span className="font-medium">{state[key]}</span>
+                          </div>
+                        )
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white border border-gray-100 rounded-lg p-5 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-100">Education Details</h3>
+                    <div className="space-y-3">
+                      {['education', 'englishGoal'].map(key => (
+                        state[key] && (
+                          <div key={key} className="flex justify-between">
+                            <span className="text-gray-600">
+                              {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                            </span>
+                            <span className="font-medium text-right max-w-xs">{state[key]}</span>
+                          </div>
+                        )
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Buttons */}
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={generatePDF}
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium rounded-lg shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                <FaFilePdf className="text-xl" />
+                Download Certificate
+              </button>
+              
+              <Link to="/" className="flex">
+                <button className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 w-full">
+                  <FaHome />
+                  Return to Home
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-          <button
-            onClick={generatePDF}
-            className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition duration-300 flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-            Save as PDF
-          </button>
           
-          <Link to="/" className="flex">
-            <button className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-md transition duration-300 w-full flex items-center justify-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-              Clear Form
-            </button>
-          </Link>
+          {/* Footer Note */}
+          <div className="bg-gray-50 px-8 py-4 border-t border-gray-200">
+            <p className="text-center text-gray-500 text-sm">
+              Need help? Contact us at homeacademy.lyari@gmail.com or call 0332-3769179
+            </p>
+          </div>
         </div>
       </div>
     </div>
