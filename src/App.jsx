@@ -14,6 +14,7 @@ import ChatbotWidget from './components/Message'
 import Explore from './pages/Explore'
 import ResultPage from './pages/ResultPage'
 import Demo from './pages/Demo'
+import AI from './pages/AI'
 
 const App = () => {
   console.log('hello');
@@ -32,6 +33,7 @@ const App = () => {
       <Route path='/explore' element={<Explore />} />
       <Route path='/result' element={<ResultPage />} />
       <Route path='/Demo' element={<Demo />} />
+      <Route path='/ai' element={<AI />} />
 
      </Routes>
      <ChatbotWidget />

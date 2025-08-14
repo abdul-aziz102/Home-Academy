@@ -1,6 +1,7 @@
+// ChatbotWidget.jsx
 import React, { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
-import Chat from './Chat'; // ✅ Import your real chatbot
+import Chat from './Chat';
 
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,23 +11,21 @@ const ChatbotWidget = () => {
       {/* Floating Chat Icon */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 bg-indigo-700 hover:bg-indigo-800 text-white p-3 rounded-full shadow-lg cursor-pointer md:bottom-6 md:right-6"
+        className="fixed bottom-4 right-4 z-50 bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 text-white p-4 rounded-full shadow-lg cursor-pointer md:bottom-6 md:right-6"
       >
-        <MessageCircle size={24} />
+        <MessageCircle size={26} />
       </div>
 
-      {/* Chatbot Popup Window */}
+      {/* Chat Popup */}
       {isOpen && (
-        <div
-          className="fixed bottom-20 right-4 z-50 w-[90vw] max-w-[360px] max-h-[80vh] bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden md:right-6"
-        >
+        <div className="fixed bottom-20 right-4 z-50 w-[90vw] max-w-[360px] max-h-[80vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white">
           {/* Header */}
-          <div className="bg-blue-600 text-white p-3 text-sm font-bold flex justify-between items-center">
+          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-3 text-sm font-bold flex justify-between items-center">
             AI Chatbot
           </div>
 
           {/* Chat Content */}
-          <div className="h-[70vh] overflow-y-auto">
+          <div className="flex-1 overflow-y-auto">
             <Chat />
           </div>
         </div>
