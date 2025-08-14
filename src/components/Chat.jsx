@@ -150,11 +150,11 @@ If you have any other questions about the academy, feel free to ask!
           <button
             onClick={generateAnswer}
             disabled={loading}
-            className={`px-4 py-2 ${
+            className={`px-3  py-2 ${
               loading ? "bg-gray-400" : "bg-indigo-700 hover:bg-gray-800"
-            } text-white text-sm sm:text-base font-semibold rounded-full shadow-md transition`}
+            } text-white text-sm  sm:text-base font-semibold rounded-lg shadow-md   transition`}
           >
-            {loading ? "Thinking..." : "->"}
+            {loading ? "Thinking..." : ">"}
           </button>
         </div>
       </div>
