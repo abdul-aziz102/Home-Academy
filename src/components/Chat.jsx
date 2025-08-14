@@ -9,33 +9,7 @@ const Chat = () => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // 📌 Full Academy Data for Context
-  const portfolioContext = `
-  Center Name: Home Academy
-  Address: Abdullah Apartment, New Kumharwara, Near Spicy Corner, Lyari, Karachi
-  Contact Numbers: 0332-3769179, 0332-2449008
-  Email: homeacademy.lyari@gmail.com
-  Levels: Pre-beginning, Beginning, Level One, Level Two, Level Three, Level Four, Level Five, Level Advanced
-  Teachers:
-    Principal: Sir Nameem
-    Sir Yasran Jan
-    Sir Meboob
-    Sir Hafeez
-    Sir Ateeq-ur-Rehman
-    Sir Abdul Rehman
-    Sir Abid Nihal
-    Sir Naeem
-    Sir Naveed
-  Established: 1999
-  Hello: Hello! How can I help you? You can ask any question about Home Academy 🥰.
-  Environment:
-    - Long-standing since 1999, stable and experienced in education.
-    - Structured learning with multiple levels and dedicated staff.
-    - Located in a community-based area in Lyari.
-  Teacher Behaviour:
-    - Professional and committed educators.
-    - Many years of teaching experience.
-  `;
+  const portfolioContext = `Your academy data here...`;
 
   const cleanAndFormatText = (text) =>
     text.replace(/#+\s?/g, "").replace(/\*\*(.*?)\*\*/g, "$1").replace(/\*/g, "•").trim();
@@ -104,7 +78,7 @@ const Chat = () => {
       <div className="p-3 bg-white border-t border-gray-200 flex items-center gap-2">
         <input
           type="text"
-          placeholder="Ask something about Home Academy..."
+          placeholder="Ask something..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && generateAnswer()}
