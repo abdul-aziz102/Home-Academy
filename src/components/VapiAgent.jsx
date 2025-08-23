@@ -1,49 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import Vapi from "@vapi-ai/web";
+import { Mic, PhoneOff } from "lucide-react"; // icons from lucide-react
 
 const VapiAgent = () => {
   const vapiRef = useRef(null);
   const [isCalling, setIsCalling] = useState(false);
 
   useEffect(() => {
-    // Initialize Vapi with your Public Key
     vapiRef.current = new Vapi("8c47cdd3-742b-4c31-a790-6f27c27d1a6e");
 
-    // Event listeners
-    vapiRef.current.on("call-start", () => {
-      console.log("Call started");
-      setIsCalling(true);
-    });
-
-    vapiRef.current.on("call-end", () => {
-      console.log("Call ended");
-      setIsCalling(false);
-    });
-
-    vapiRef.current.on("speech-start", () => {
-      console.log("Assistant started speaking");
-    });
-
-    vapiRef.current.on("speech-end", () => {
-      console.log("Assistant stopped speaking");
-    });
-
-    vapiRef.current.on("message", (msg) => {
-      console.log("Message:", msg);
-    });
-
-    vapiRef.current.on("error", (err) => {
-      console.error("Vapi error:", err);
-    });
+    vapiRef.current.on("call-start", () => setIsCalling(true));
+    vapiRef.current.on("call-end", () => setIsCalling(false));
+    vapiRef.current.on("error", (err) => console.error("Vapi error:", err));
   }, []);
 
-  // Start call
   const startCall = () => {
     if (!vapiRef.current) return;
     vapiRef.current.start({
       model: {
         provider: "openai",
-        model: "gpt-4o-mini", // fast + cheap model
+        model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
@@ -53,35 +29,38 @@ const VapiAgent = () => {
       },
       voice: {
         provider: "11labs",
-        voiceId: "burt", // change to your desired voice
+        voiceId: "burt",
       },
     });
   };
 
-  // Stop call
   const stopCall = () => {
     if (!vapiRef.current) return;
     vapiRef.current.stop();
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
-      <h2 className="text-xl font-bold">🎙 Home Academy AI Agent</h2>
-      {!isCalling ? (
-        <button
-          onClick={startCall}
-          className="px-6 py-2 rounded-lg bg-green-500 text-white font-semibold"
-        >
-          Start Call
-        </button>
-      ) : (
-        <button
-          onClick={stopCall}
-          className="px-6 py-2 rounded-lg bg-red-500 text-white font-semibold"
-        >
-          End Call
-        </button>
-      )}
+    <div>
+      {/* Floating Button */}
+      <div className="fixed bottom-6 right-6">
+        {!isCalling ? (
+          <button
+            onClick={startCall}
+            className="p-4 mr-18 mt-14 rounded-full bg-green-500 text-white shadow-lg hover:scale-110 transition"
+            title="Start Call"
+          >
+            <Mic size={28} />
+          </button>
+        ) : (
+          <button
+            onClick={stopCall}
+            className="p-4 mr-14 rounded-full bg-red-500 text-white shadow-lg hover:scale-110 transition"
+            title="End Call"
+          >
+            <PhoneOff size={28} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
