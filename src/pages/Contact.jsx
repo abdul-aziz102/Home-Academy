@@ -4,6 +4,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    Number: 0,
     message: '',
   });
 
@@ -18,7 +19,7 @@ const Contact = () => {
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', Number: 0, message: '' });
     }, 3000);
   };
 
@@ -146,7 +147,7 @@ const Contact = () => {
               className="bg-white border border-indigo-200 p-6 rounded-xl shadow-sm space-y-5"
             >
               <h3 className="text-xl font-semibold text-indigo-700 mb-2">Send Us a Message</h3>
-              
+
               {isSubmitted && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                   <strong className="font-bold">Thank you!</strong>
@@ -176,6 +177,19 @@ const Contact = () => {
                   name="email"
                   placeholder="john@example.com"
                   value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label htmlFor="number" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input
+                  type="number"
+                  id="number"
+                  name="number"
+                  placeholder="1234567890"
+                  value={formData.number}
                   onChange={handleChange}
                   required
                   className="w-full p-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
@@ -229,19 +243,10 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Map Section */}
-      <div className="max-w-4xl mx-auto mt-12 bg-white rounded-2xl shadow-xl border border-indigo-200 overflow-hidden">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.041841073907!2d67.0088143150037!3d24.86237798405196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e5b3a5d5e1f%3A0x5a1b5e5b5e5b5e5b!2sAbdullah%20Apartment%2C%20New%20Kumharwara%2C%20Near%20Spicy%20Corner%2C%20Lyari%2C%20Karachi!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" 
-          width="100%" 
-          height="400" 
-          style={{border:0}} 
-          allowFullScreen="" 
-          loading="lazy" 
-          title="Location Map"
-          className="rounded-b-2xl"
-        ></iframe>
-      </div>
+     
+
+     
+
     </section>
   );
 };

@@ -13,6 +13,10 @@ import Explore from './pages/Explore'
 import ResultPage from './pages/ResultPage'
 import Demo from './pages/Demo'
 import { Chat } from './components/Chat'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import Sitemap from './pages/Sitemap'
+import VapiAgent from './components/VapiAgent'
 
 const App = () => {
   console.log('hello');
@@ -22,6 +26,7 @@ const App = () => {
       <Router>
       <Navbar />
       <Chat />
+      <VapiAgent />
      <Routes>
       <Route path="/" element={<Home />} />
       <Route path='/about' element={<About />} />
@@ -30,7 +35,10 @@ const App = () => {
       <Route path='register' element={<Register />} />
       <Route path='/explore' element={<Explore />} />
       <Route path='/result' element={<ResultPage />} />
-      <Route path='/Demo' element={<Demo />} />
+      <Route path='/demo' element={<Demo />} />
+      <Route path='/privacy' element={<PrivacyPolicy />} />
+      <Route path='/terms' element={<TermsOfService />} />
+      <Route path='/sitemap' element={<Sitemap />} />
 
      </Routes>
       <Footer />

@@ -4,59 +4,99 @@ import { motion } from 'framer-motion';
 const instructors = [
   {
     id: 1,
-    name: "Sir Yasran Jan",
+    name: "Sir Abdul Hafeez",
     specialization: "Corporate English",
     experience: "25+ years",
-    bio: "Former corporate trainer specializing in presentations and negotiations",
-    image: "/sir-yas.jpg"
+    bio: "Expert in workplace communication, business correspondence, and professional networking.",
+    image: "/s1.jpg"
   },
   {
     id: 2,
-    name: "Sir Meboob",
+    name: "Sir Yasir",
     specialization: "Exam Preparation",
     experience: "25 years",
-    bio: "Exam preparation expert with 95% student success rate",
-    image: "/SIR-MEHBOB.jpeg"
+    bio: "Specialist in IELTS, TOEFL, and competitive exam strategies with proven results.",
+    image: "/s2.jpg"
   },
   {
     id: 3,
-    name: "Sir Hafeez",
-    specialization: "Pre-Beginning",
-    experience: "25 years",
-    bio: "Focuses on accent reduction and cultural fluency",
-    image: "sir-hafeez.jpeg"
+    name: "Sir Naveed",
+    specialization: "Pronunciation & Accent",
+    experience: "20 years",
+    bio: "Helps learners improve fluency, clarity, and accent through phonetics training.",
+    image: "s3.jpg"
   },
   {
     id: 4,
     name: "Sir Ateeq-ur-Rehman",
     specialization: "Business English",
-    experience: "25 years",
-    bio: "Former corporate trainer specializing in presentations and negotiations",
-    image: "SIRATEEQ2.jpeg"
+    experience: "22 years",
+    bio: "Guides professionals in mastering email etiquette, presentations, and client meetings.",
+    image: "s4.jpg"
   },
   {
     id: 5,
-    name: "Sir Abid Nihal",
-    specialization: "Explaining Grammer",
-    experience: "25 years",
-    bio: "Exam preparation expert with 95% student success rate",
-    image: "/SIRABID.jpeg"
+    name: "Sir Ateeq-ur-Rehman",
+    specialization: "Grammar & Structure",
+    experience: "18 years",
+    bio: "Passionate about simplifying complex grammar rules for easy understanding.",
+    image: "/s5.jpg"
   },
   {
     id: 6,
-    name: "Sir Shahjahan",
-    specialization: "grammer",
-    experience: "25 years",
-    bio: "Specialist in research papers and academic publications",
-    image: "SIR-SHAH.jpeg"
+    name: "Sir Abid Nihal",
+    specialization: "Academic Writing",
+    experience: "20 years",
+    bio: "Experienced in research writing, essays, and thesis guidance for students.",
+    image: "/s6.jpg"
   },
   {
     id: 7,
     name: "Sir Abdul Rehman",
-    specialization: "English Activities Games",
-    experience: "25 years",
-    bio: "Former corporate trainer specializing in presentations and negotiations",
-    image: "SIRREHMAN (5).jpeg"
+    specialization: "English Activities & Games",
+    experience: "15 years",
+    bio: "Engages learners with interactive games, debates, and speaking activities.",
+    image: "/s7.jpg"
+  },
+  {
+    id: 8,
+    name: "Sir Aqeel",
+    specialization: "Student Mentorship",
+    experience: "17 years",
+    bio: "Dedicated mentor helping students overcome fear of speaking and gain confidence.",
+    image: "/s8.jpg"
+  },
+  {
+    id: 9,
+    name: "Sir Abdul Basit",
+    specialization: "Young Learners",
+    experience: "7 years",
+    bio: "Specializes in teaching children with fun, engaging, and activity-based learning.",
+    image: "/s9.jpg"
+  },
+  {
+    id: 10,
+    name: "Sir Mushtaq",
+    specialization: "Beginner English",
+    experience: "10 years",
+    bio: "Helps beginners build strong foundations in vocabulary and basic conversation.",
+    image: "/s10.jpg"
+  },
+  {
+    id: 11,
+    name: "Sir Saleem",
+    specialization: "Spoken English",
+    experience: "12 years",
+    bio: "Encourages learners to speak confidently in daily and professional situations.",
+    image: "/s11.jpg"
+  },
+  {
+    id: 12,
+    name: "Sir Ghafoor",
+    specialization: "Communication Skills",
+    experience: "14 years",
+    bio: "Focuses on public speaking, group discussions, and interpersonal skills.",
+    image: "/s12.jpg"
   },
 ];
 
@@ -108,7 +148,7 @@ const Instructors = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Meet Our Expert Instructors</h2>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">Meet Our Expert Current Instructors</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Certified English language specialists with proven teaching methodologies
           </p>
