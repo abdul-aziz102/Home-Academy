@@ -28,7 +28,7 @@ const instructors = [
   },
   {
     id: 4,
-    name: "Sir Ateeq-ur-Rehman",
+    name: "Sir Asghar",
     specialization: "Business English",
     experience: "22 years",
     bio: "Guides professionals in mastering email etiquette, presentations, and client meetings.",
@@ -84,7 +84,7 @@ const instructors = [
   },
   {
     id: 11,
-    name: "Sir Saleem",
+    name: "Sir Zubair",
     specialization: "Spoken English",
     experience: "12 years",
     bio: "Encourages learners to speak confidently in daily and professional situations.",
@@ -92,7 +92,7 @@ const instructors = [
   },
   {
     id: 12,
-    name: "Sir Ghafoor",
+    name: "Sir Jameel",
     specialization: "Communication Skills",
     experience: "14 years",
     bio: "Focuses on public speaking, group discussions, and interpersonal skills.",

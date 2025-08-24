@@ -42,11 +42,11 @@ const VapiAgent = () => {
   return (
     <div>
       {/* Floating Button */}
-      <div className="fixed bottom-6 right-6">
+      <div className="fixed bottom-6 right-6 z-50">
         {!isCalling ? (
           <button
             onClick={startCall}
-            className="p-4 mr-18 mt-14 rounded-full bg-green-500 text-white shadow-lg hover:scale-110 transition"
+            className="p-4 rounded-full mb-18 cursor-pointer bg-indigo-700 text-white shadow-lg hover:scale-110 transition flex items-center justify-center"
             title="Start Call"
           >
             <Mic size={28} />
@@ -54,7 +54,7 @@ const VapiAgent = () => {
         ) : (
           <button
             onClick={stopCall}
-            className="p-4 mr-14 rounded-full bg-red-500 text-white shadow-lg hover:scale-110 transition"
+            className="p-4 rounded-full mb-18 bg-red-500 text-white shadow-lg hover:scale-110 transition flex items-center justify-center"
             title="End Call"
           >
             <PhoneOff size={28} />

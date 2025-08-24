@@ -16,7 +16,6 @@ import { Chat } from './components/Chat'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import Sitemap from './pages/Sitemap'
-import VapiAgent from './components/VapiAgent'
 
 const App = () => {
   console.log('hello');
@@ -26,7 +25,6 @@ const App = () => {
       <Router>
       <Navbar />
       <Chat />
-      <VapiAgent />
      <Routes>
       <Route path="/" element={<Home />} />
       <Route path='/about' element={<About />} />
