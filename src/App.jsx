@@ -12,7 +12,6 @@ import Register from './pages/Register'
 import Explore from './pages/Explore'
 import ResultPage from './pages/ResultPage'
 import Demo from './pages/Demo'
-import { Chat } from './components/Chat'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import Sitemap from './pages/Sitemap'
@@ -24,7 +23,6 @@ const App = () => {
   <div className='body'>
       <Router>
       <Navbar />
-      <Chat />
      <Routes>
       <Route path="/" element={<Home />} />
       <Route path='/about' element={<About />} />
