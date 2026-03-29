@@ -15,29 +15,51 @@ import Demo from './pages/Demo'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import Sitemap from './pages/Sitemap'
+import AdminLogin from './pages/AdminLogin'
+import AdminLayout from './components/admin/AdminLayout'
+import AdminDashboard from './components/admin/AdminDashboard'
+import AdminStudents from './components/admin/AdminStudents'
+import AdminCourses from './components/admin/AdminCourses'
+import AdminTeachers from './components/admin/AdminTeachers'
+import AdminContacts from './components/admin/AdminContacts'
+import StudentLogin from './pages/StudentLogin'
+import StudentDashboard from './pages/StudentDashboard'
+import WhatsAppButton from './components/WhatsAppButton'
 
 const App = () => {
   console.log('hello');
-  
+
   return (
   <div className='body'>
       <Router>
-      <Navbar />
      <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path='/about' element={<About />} />
-      <Route path='/contact' element={<Contact />} />
-      <Route path='/Courses' element={<Corses />} />
-      <Route path='register' element={<Register />} />
-      <Route path='/explore' element={<Explore />} />
-      <Route path='/result' element={<ResultPage />} />
-      <Route path='/demo' element={<Demo />} />
-      <Route path='/privacy' element={<PrivacyPolicy />} />
-      <Route path='/terms' element={<TermsOfService />} />
-      <Route path='/sitemap' element={<Sitemap />} />
+      {/* Admin routes - no Navbar/Footer */}
+      <Route path='/adminlogin' element={<AdminLogin />} />
+      <Route path='/admin' element={<AdminLayout />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path='students' element={<AdminStudents />} />
+        <Route path='courses' element={<AdminCourses />} />
+        <Route path='teachers' element={<AdminTeachers />} />
+        <Route path='contacts' element={<AdminContacts />} />
+      </Route>
+
+      {/* Public routes with Navbar/Footer */}
+      <Route path="/" element={<><Navbar /><Home /><Footer /></>} />
+      <Route path='/about' element={<><Navbar /><About /><Footer /></>} />
+      <Route path='/contact' element={<><Navbar /><Contact /><Footer /></>} />
+      <Route path='/Courses' element={<><Navbar /><Corses /><Footer /></>} />
+      <Route path='register' element={<><Navbar /><Register /><Footer /></>} />
+      <Route path='/explore' element={<><Navbar /><Explore /><Footer /></>} />
+      <Route path='/result' element={<><Navbar /><ResultPage /><Footer /></>} />
+      <Route path='/demo' element={<><Navbar /><Demo /><Footer /></>} />
+      <Route path='/privacy' element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
+      <Route path='/terms' element={<><Navbar /><TermsOfService /><Footer /></>} />
+      <Route path='/sitemap' element={<><Navbar /><Sitemap /><Footer /></>} />
+      <Route path='/student-login' element={<><Navbar /><StudentLogin /><Footer /></>} />
+      <Route path='/dashboard' element={<><Navbar /><StudentDashboard /><Footer /></>} />
 
      </Routes>
-      <Footer />
+      <WhatsAppButton />
       </Router>
   </div>
   )

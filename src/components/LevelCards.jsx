@@ -1,325 +1,545 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheck, FaArrowRight, FaRegClock, FaUserGraduate } from 'react-icons/fa';
 
-const LevelCards = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [activeFilter, setActiveFilter] = useState('All');
+const filters = ["All", "Beginner", "Elementary", "Intermediate", "Advanced"];
 
-  const levels = [
-    {
-      title: "Pre-Beginner",
-      description: "Start from scratch with basic vocabulary, greetings, and simple sentences.",
-      image: "/pre-beg.png",
-      skills: ["Alphabet & sounds", "Basic greetings", "Simple questions", "Everyday words"],
-      target: "Absolute beginners",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 3,200",
-      category: "Beginner"
-    },
-    {
-      title: "Beginner",
-      description: "Build foundation with present tense, daily conversations, and essential grammar.",
-      image: "/brg.png",
-      skills: ["Present tenses", "Daily routines", "Shopping vocabulary", "Simple directions"],
-      target: "Basic understanding",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 3,800",
-      category: "Beginner"
-    },
-    {
-      title: "Elementary (Level 1)",
-      description: "Handle basic social situations, read simple texts, and write short paragraphs.",
-      image: "/le1.png",
-      skills: ["Past tenses", "Describing people", "Writing emails", "Telling stories"],
-      target: "CEFR A1",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 4,000",
-      category: "Elementary"
-    },
-    {
-      title: "Pre-Intermediate (Level 2)",
-      description: "Express opinions, understand main points in conversations, and write cohesive texts.",
-      image: "/le2.png",
-      skills: ["Future tenses", "Comparing things", "News articles", "Phone conversations"],
-      target: "CEFR A2",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 4,200",
-      category: "Intermediate"
-    },
-    {
-      title: "Intermediate (Level 3)",
-      description: "Discuss various topics, understand native speakers, and write detailed texts.",
-      image: "/l3.png",
-      skills: ["Conditionals", "Debating skills", "Formal letters", "TV shows understanding"],
-      target: "CEFR B1",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 4,500",
-      category: "Intermediate"
-    },
-    {
-      title: "Upper-Intermediate (Level 4)",
-      description: "Communicate fluently in professional contexts with nuanced language use.",
-      image: "/le4.png",
-      skills: ["Complex grammar", "Academic writing", "Presentations", "Idiomatic expressions"],
-      target: "CEFR B2",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 4,800",
-      category: "Advanced"
-    },
-    {
-      title: "Advanced (Level 5)",
-      description: "Master English for academic excellence, business leadership, and cultural nuance.",
-      image: "/le5.png",
-      skills: ["Subtle meanings", "Professional reports", "Negotiations", "Literary analysis"],
-      target: "CEFR C1",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 5,000",
-      category: "Advanced"
-    },
-    {
-      title: "Proficiency (Level Advance)",
-      description: "Achieve native-like fluency for specialized professional and academic contexts.",
-      image: "/Adv.png",
-      skills: ["Advanced rhetoric", "Technical writing", "Media analysis", "Cultural nuance"],
-      target: "CEFR C2",
-      duration: "12 weeks",
-      intensity: "5 classes/week",
-      price: "Rs. 5,500",
-      category: "Advanced"
+
+const CourseCard = ({ course, index }) => {
+  const isRegistered = localStorage.getItem('isRegistered') === 'true';
+  const registrationData = isRegistered ? JSON.parse(localStorage.getItem('registrationData')) : null;
+  const navigate = useNavigate();
+
+  const handleEnroll = () => {
+    if (isRegistered && registrationData) {
+      navigate('/result', { state: registrationData });
+    } else {
+      navigate('/register');
     }
-  ];
-
-  const filters = ['All', 'Beginner', 'Elementary', 'Intermediate', 'Advanced'];
-
-  const filteredLevels = activeFilter === 'All'
-    ? levels
-    : levels.filter(level => level.category === activeFilter);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const cardItem = {
-    hidden: { y: 30, opacity: 0 },
-    show: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
-
-  const hoverEffect = {
-    hover: {
-      y: -10,
-      scale: 1.02,
-      boxShadow: "0 20px 25px -5px rgba(79, 70, 229, 0.15)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    }
-  };
-
-  const hoverContent = {
-    hover: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3 }
-    },
-    initial: { opacity: 0, y: 20 }
   };
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-5">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl font-bold mb-3 text-gray-800">Our English Proficiency Levels</h2>
-          <p className="text-lg max-w-3xl mx-auto text-gray-600">
-            Structured progression from absolute beginner to native-like fluency with certified instructors
-          </p>
-        </motion.div>
+    <motion.div
+      className="ha-card"
+      style={{ "--accent": course.accent, "--glow": course.accentGlow }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.25, 0.1, 0.25, 1] }}
+      whileHover={{ y: -6, transition: { duration: 0.3 } }}
+    >
+      <div className="ha-card-line" />
+      <span className="ha-card-roman">{course.roman}</span>
 
-        <motion.div className="flex flex-wrap justify-center gap-2 mb-10">
-          {filters.map(filter => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeFilter === filter
-                  ? 'bg-indigo-600 text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </motion.div>
-
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <AnimatePresence>
-            {filteredLevels.map((level, index) => (
-              <motion.div 
-                key={level.title}
-                variants={cardItem}
-                layout
-                initial="hidden"
-                animate="show"
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="group relative"
-                onHoverStart={() => setHoveredCard(index)}
-                onHoverEnd={() => setHoveredCard(null)}
-              >
-                <motion.div 
-                  className="bg-white rounded-xl shadow-sm overflow-hidden h-full flex flex-col border border-gray-100"
-                  variants={hoverEffect}
-                  whileHover="hover"
-                >
-                  <div className="h-48 overflow-hidden relative">
-                    <img 
-                      src={level.image}
-                      alt={level.title}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="absolute top-4 right-4 bg-white/90 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full shadow">
-                      {level.target}
-                    </div>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="mb-3">
-                      <h3 className="text-xl font-bold text-gray-800">{level.title}</h3>
-                    </div>
-
-                    <p className="text-gray-600 mb-4 text-sm">{level.description}</p>
-
-                    <div className="mb-5 flex-1">
-                      <h4 className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">YOU'LL LEARN</h4>
-                      <ul className="space-y-2">
-                        {level.skills.map((skill, i) => (
-                          <motion.li key={i} className="flex items-center text-sm" whileHover={{ x: 5 }}>
-                            <FaCheck className="w-3 h-3 mr-2 text-green-500" />
-                            <span className="text-gray-700">{skill}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs">
-                      <div className="flex items-center text-gray-500">
-                        <FaRegClock className="mr-1.5 text-indigo-500" />
-                        {level.duration}
-                      </div>
-                      <div className="flex items-center text-gray-500">
-                        <FaUserGraduate className="mr-1.5 text-indigo-500" />
-                        {level.intensity}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-                      <span className="font-bold text-indigo-700">{level.price}</span>
-                      <Link to="/courses">
-                        <motion.button 
-                          className="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800"
-                          whileHover={{ x: 3 }}
-                        >
-                          Enroll Now <FaArrowRight className="ml-1.5" />
-                        </motion.button>
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <AnimatePresence>
-                  {hoveredCard === index && (
-                    <motion.div 
-                      className="absolute inset-0 bg-indigo-600/90 rounded-xl p-5 flex flex-col justify-center items-center text-white"
-                      initial="initial"
-                      animate="hover"
-                      exit="initial"
-                      variants={hoverContent}
-                    >
-                      <h3 className="text-xl font-bold mb-3">{level.title}</h3>
-                      <p className="text-center text-indigo-100 mb-5">{level.description}</p>
-                      <div className="grid grid-cols-2 gap-4 w-full mb-5">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold">{level.duration}</div>
-                          <div className="text-xs text-indigo-200">Duration</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold">{level.price}</div>
-                          <div className="text-xs text-indigo-200">Investment</div>
-                        </div>
-                      </div>
-                      <Link to="/courses" className="w-full">
-                        <button className="w-full py-2.5 bg-white text-indigo-700 font-semibold rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
-                          Start Learning <FaArrowRight className="ml-2" />
-                        </button>
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-3">Not sure which level is right for you?</h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Take our free assessment test and get personalized recommendations
-          </p>
-          <Link to="/assessment">
-            <motion.button 
-              className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Take Free Assessment
-            </motion.button>
-          </Link>
-        </motion.div>
+      <div className="ha-card-badge" style={{ color: course.badgeColor, borderColor: `${course.badgeColor}33`, background: `${course.badgeColor}12` }}>
+        {course.badge}
       </div>
-    </section>
+
+      <div className="ha-card-head">
+        <h3 className="ha-card-title">{course.level}</h3>
+        <p className="ha-card-sub">{course.subtitle}</p>
+      </div>
+
+      <p className="ha-card-desc">{course.description}</p>
+
+      <div className="ha-card-skills-label">YOU'LL LEARN</div>
+      <ul className="ha-card-skills">
+        {course.skills.map((s, i) => (
+          <li key={i} className="ha-card-skill-item">
+            <span className="ha-skill-check">✓</span>
+            {s}
+          </li>
+        ))}
+      </ul>
+
+      <div className="ha-card-footer">
+        <div className="ha-card-meta">
+          <span className="ha-meta-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {course.duration}
+          </span>
+          <span className="ha-meta-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            {course.classes}
+          </span>
+        </div>
+        <div className="ha-card-bottom">
+          <span className="ha-card-price">{course.price}</span>
+          <motion.button
+            className="ha-card-btn"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={handleEnroll}
+          >
+            {isRegistered ? 'Download PDF' : 'Enroll Now'}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </motion.button>
+        </div>
+      </div>
+
+      {course.isTop && <div className="ha-card-crown">👑 MOST ADVANCED</div>}
+    </motion.div>
   );
 };
 
-export default LevelCards;
+const mapDbCourse = (c, index) => {
+  const accents = ['#64748b', '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#f97316', '#ec4899', '#eab308'];
+  const accent = c.accent || accents[index % accents.length];
+  const romans = ['Ⅰ','Ⅱ','Ⅲ','Ⅳ','Ⅴ','Ⅵ','Ⅶ','Ⅷ','Ⅸ','Ⅹ'];
+
+  const categoryMap = {
+    'beginner': 'Beginner', 'pre-beginner': 'Beginner',
+    'elementary': 'Elementary', 'a1': 'Elementary', 'a2': 'Elementary',
+    'intermediate': 'Intermediate', 'b1': 'Intermediate', 'b2': 'Intermediate',
+    'advanced': 'Advanced', 'c1': 'Advanced', 'c2': 'Advanced',
+  };
+  const levelLower = (c.level || '').toLowerCase();
+  const category = categoryMap[levelLower] || Object.entries(categoryMap).find(([k]) => levelLower.includes(k))?.[1] || 'Beginner';
+
+  return {
+    id: c._id,
+    level: c.title,
+    subtitle: c.level,
+    badge: c.badge || c.level.toUpperCase(),
+    badgeColor: accent,
+    category,
+    roman: romans[index % romans.length],
+    description: c.description,
+    skills: c.skills || [],
+    duration: c.duration || '12 weeks',
+    classes: c.classes ? `${c.classes} classes/week` : '5 classes/week',
+    price: `Rs. ${c.price?.toLocaleString() || '0'}`,
+    accent,
+    accentGlow: `${accent}40`,
+  };
+};
+
+const CoursesSection = () => {
+  const [active, setActive] = useState("All");
+  const [allCourses, setAllCourses] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/admin/courses')
+      .then(res => res.ok ? res.json() : [])
+      .then(dbCourses => {
+        const mapped = dbCourses.filter(c => c.isActive !== false).map((c, i) => mapDbCourse(c, i));
+        setAllCourses(mapped);
+      })
+      .catch(() => {});
+  }, []);
+
+  const filtered = active === "All" ? allCourses : allCourses.filter(c => c.category === active);
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+
+        .ha-courses-section {
+          font-family: 'Outfit', sans-serif;
+          background: #060d22;
+          padding: 96px 24px;
+          position: relative;
+          overflow: hidden;
+        }
+        .ha-courses-section::before {
+          content: '';
+          position: absolute;
+          top: -120px; left: 50%;
+          transform: translateX(-50%);
+          width: 700px; height: 400px;
+          background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .ha-courses-section::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(99,179,237,0.06) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none;
+        }
+        .ha-courses-inner {
+          max-width: 1280px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Heading */
+        .ha-section-eyebrow {
+          text-align: center;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3b82f6;
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+        .ha-eyebrow-line { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #3b82f6); }
+        .ha-eyebrow-line.right { background: linear-gradient(90deg, #3b82f6, transparent); }
+
+        .ha-section-title {
+          text-align: center;
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.1;
+          color: #f1f5f9;
+          margin: 0 0 12px;
+        }
+        .ha-section-title span {
+          background: linear-gradient(135deg, #60a5fa, #06b6d4);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .ha-section-sub {
+          text-align: center;
+          color: rgba(148,163,184,0.7);
+          font-size: 1rem;
+          margin-bottom: 48px;
+          max-width: 520px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        /* Filters */
+        .ha-filters {
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 48px;
+        }
+        .ha-filter-btn {
+          padding: 8px 20px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          border-radius: 100px;
+          border: 1px solid rgba(99,179,237,0.15);
+          background: rgba(255,255,255,0.03);
+          color: rgba(148,163,184,0.8);
+          cursor: pointer;
+          transition: all 0.25s ease;
+          letter-spacing: 0.03em;
+        }
+        .ha-filter-btn:hover {
+          border-color: rgba(59,130,246,0.4);
+          color: #93c5fd;
+          background: rgba(59,130,246,0.08);
+        }
+        .ha-filter-btn.active {
+          background: linear-gradient(135deg, #2563eb, #3b82f6);
+          border-color: transparent;
+          color: white;
+          box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+        }
+
+        /* path label */
+        .ha-path-label {
+          text-align: center;
+          margin-bottom: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          color: rgba(148,163,184,0.3);
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .ha-path-line { height: 1px; width: 60px; background: linear-gradient(90deg, transparent, rgba(99,179,237,0.2), transparent); }
+
+        /* Grid */
+        .ha-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 24px;
+        }
+
+        /* Card */
+        .ha-card {
+          position: relative;
+          background: rgba(15,23,42,0.9);
+          border: 1px solid rgba(99,179,237,0.1);
+          border-radius: 16px;
+          padding: 28px 24px 22px;
+          overflow: hidden;
+          transition: border-color 0.35s ease, box-shadow 0.35s ease;
+          cursor: pointer;
+        }
+        .ha-card:hover {
+          border-color: var(--accent);
+          box-shadow: 0 0 0 1px var(--accent),
+                      0 20px 60px var(--glow),
+                      0 4px 20px rgba(0,0,0,0.5);
+        }
+        .ha-card-line {
+          position: absolute;
+          top: 0; left: 0; right: 0; height: 3px;
+          background: linear-gradient(90deg, var(--accent), transparent);
+          opacity: 0.6;
+          transition: opacity 0.3s;
+        }
+        .ha-card:hover .ha-card-line { opacity: 1; }
+
+        .ha-card-roman {
+          position: absolute;
+          top: 10px; right: 14px;
+          font-family: 'DM Mono', monospace;
+          font-size: 3.8rem;
+          font-weight: 500;
+          color: rgba(99,179,237,0.04);
+          line-height: 1;
+          pointer-events: none;
+          transition: color 0.3s;
+        }
+        .ha-card:hover .ha-card-roman { color: rgba(99,179,237,0.07); }
+
+        .ha-card-badge {
+          display: inline-block;
+          font-size: 0.58rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          padding: 3px 10px;
+          border-radius: 100px;
+          border: 1px solid;
+          margin-bottom: 14px;
+        }
+
+        .ha-card-head { margin-bottom: 10px; }
+        .ha-card-title {
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #f1f5f9;
+          letter-spacing: -0.02em;
+          line-height: 1.25;
+          margin: 0 0 3px;
+        }
+        .ha-card-sub {
+          font-size: 0.72rem;
+          color: rgba(148,163,184,0.45);
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          margin: 0;
+        }
+        .ha-card-desc {
+          font-size: 0.8rem;
+          color: rgba(148,163,184,0.6);
+          line-height: 1.6;
+          margin: 0 0 16px;
+        }
+
+        .ha-card-skills-label {
+          font-size: 0.58rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: rgba(99,179,237,0.4);
+          margin-bottom: 8px;
+        }
+        .ha-card-skills {
+          list-style: none;
+          margin: 0 0 18px;
+          padding: 0;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 5px 8px;
+        }
+        .ha-card-skill-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.76rem;
+          color: rgba(203,213,225,0.65);
+          font-weight: 500;
+        }
+        .ha-skill-check {
+          color: var(--accent);
+          font-size: 0.68rem;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+
+        .ha-card-footer {
+          border-top: 1px solid rgba(99,179,237,0.07);
+          padding-top: 14px;
+        }
+        .ha-card-meta {
+          display: flex;
+          gap: 16px;
+          margin-bottom: 12px;
+        }
+        .ha-meta-item {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.73rem;
+          color: rgba(148,163,184,0.45);
+          font-weight: 500;
+        }
+        .ha-card-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .ha-card-price {
+          font-size: 1.15rem;
+          font-weight: 800;
+          color: var(--accent);
+          letter-spacing: -0.02em;
+        }
+        .ha-card-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 14px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: var(--accent);
+          background: color-mix(in srgb, var(--accent) 10%, transparent);
+          border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          letter-spacing: 0.02em;
+        }
+        .ha-card-btn:hover {
+          background: color-mix(in srgb, var(--accent) 18%, transparent);
+          box-shadow: 0 4px 14px var(--glow);
+        }
+
+        .ha-card-crown {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          text-align: center;
+          font-size: 0.56rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: #fde68a;
+          background: rgba(234,179,8,0.07);
+          border-top: 1px solid rgba(234,179,8,0.14);
+          padding: 5px;
+        }
+
+        /* Stats */
+        .ha-stats {
+          display: flex;
+          justify-content: center;
+          gap: 48px;
+          margin-top: 64px;
+          padding-top: 48px;
+          border-top: 1px solid rgba(99,179,237,0.08);
+          flex-wrap: wrap;
+        }
+        .ha-stat { text-align: center; }
+        .ha-stat-num {
+          font-size: 2rem;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          background: linear-gradient(135deg, #f1f5f9, #93c5fd);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1;
+          margin-bottom: 4px;
+        }
+        .ha-stat-label {
+          font-size: 0.72rem;
+          color: rgba(148,163,184,0.45);
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        @media (max-width: 640px) {
+          .ha-grid { grid-template-columns: 1fr; }
+          .ha-stats { gap: 28px; }
+          .ha-card-skills { grid-template-columns: 1fr; }
+        }
+      `}</style>
+
+      <section className="ha-courses-section">
+        <div className="ha-courses-inner">
+
+          <div className="ha-section-eyebrow">
+            <span className="ha-eyebrow-line" />
+            STRUCTURED CURRICULUM
+            <span className="ha-eyebrow-line right" />
+          </div>
+
+          <h2 className="ha-section-title">
+            Our English <span>Proficiency Levels</span>
+          </h2>
+          <p className="ha-section-sub">
+            Structured progression from absolute beginner to native-like fluency with certified instructors
+          </p>
+
+          <div className="ha-filters">
+            {filters.map(f => (
+              <motion.button
+                key={f}
+                className={`ha-filter-btn ${active === f ? "active" : ""}`}
+                onClick={() => setActive(f)}
+                whileTap={{ scale: 0.96 }}
+              >
+                {f}
+              </motion.button>
+            ))}
+          </div>
+
+          <div className="ha-path-label">
+            <span className="ha-path-line" />
+            {filtered.length} course{filtered.length !== 1 ? "s" : ""} — progress from left to right
+            <span className="ha-path-line" />
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              className="ha-grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {filtered.map((course, i) => (
+                <CourseCard key={course.id} course={course} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="ha-stats">
+            {[
+              { num: String(allCourses.length), label: "Course Levels" },
+              { num: "500+", label: "Students Enrolled" },
+              { num: "12", label: "Weeks Per Level" },
+              { num: "98%", label: "Success Rate" },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                className="ha-stat"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 + 0.3 }}
+              >
+                <div className="ha-stat-num">{s.num}</div>
+                <div className="ha-stat-label">{s.label}</div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default CoursesSection;
